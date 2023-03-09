@@ -1,6 +1,5 @@
 #include<iostream>
 #include<algorithm>
-#include<stdio.h>
 #include<string>
 #include<list>
 using namespace std;
@@ -47,7 +46,7 @@ class tasks{
         }
         void removeTask(int pos){
             auto it = taskList.begin();
-            advance(it,pos);
+            advance(it,pos-1);
             taskList.erase(it);
         }
         static void hello(){
@@ -68,12 +67,15 @@ class controler{
             switch (this->choice) {
                 case 1:
                     this->wyswietl();
+                    displayAfterOption();
                     break;
                 case 2:
                     this->addTask();
+                    displayAfterOption();
                     break;
                 case 3:
                     this->removeTask();
+                    displayAfterOption();
                     break;
                 case 4:
                     exit(0);
@@ -98,7 +100,6 @@ class controler{
         }
         void wyswietl(){
             this->zadania.displayTasks();
-            displayAfterOption();
         }
         void addTask(){
             string zadanie, waga;
@@ -106,14 +107,12 @@ class controler{
             cout<<"Podaj nazwe zadania, wage jego oraz id"<<endl;
             cin>>zadanie>>waga>>id;
             this->zadania.addTask(zadanie,waga,id);
-            displayAfterOption();
         }
         void removeTask(){
             int zadanko;
             cout<<"Podaj ktore zadanie chcesz usunac? (od gory)"<<endl;
             cin>>zadanko;
             this->zadania.removeTask(zadanko);
-            displayAfterOption();
         }
     private:
         int choice;
